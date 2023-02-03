@@ -74,10 +74,9 @@
   });
 
   let movieObject = {
-    id: '34kjkj34g5k5jgkg13133',
-    title: 'i',
+    title: 'Scream',
     year: 1994,
-    director: 'Frank Darabont',
+    director: 'Dre',
     rating: 9.3,
     runtime: 142,
     genre: 'Drama',
@@ -85,7 +84,8 @@
   }
 // Call the function
 //  console.log(deleteMovie(movieObject));
-  deleteMovie(movieObject)
+
+ addMovie(movieObject)
 
 
 })();
