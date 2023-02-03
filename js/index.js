@@ -72,4 +72,20 @@
     contentLoad.classList.remove("opacity");
     contentDetail.classList.add("hidden");
   });
+
+  let movieObject = {
+    id: '34kjkj34g5k5jgkg13133',
+    title: 'i',
+    year: 1994,
+    director: 'Frank Darabont',
+    rating: 9.3,
+    runtime: 142,
+    genre: 'Drama',
+    actors: 'Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler',
+  }
+// Call the function
+//  console.log(deleteMovie(movieObject));
+  deleteMovie(movieObject)
+
+
 })();
