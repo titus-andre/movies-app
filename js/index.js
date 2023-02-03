@@ -2,12 +2,13 @@
   // This is the entry point for your application. Write all of your code here.
   // Before you can use the database, you need to configure the "db" object
   // with your team name in the "js/movies-api.js" file.
-
+  const movieIds = [];
   getMovies().then((movies) => {
     let moviez = document.querySelector("#movie");
     console.log(movies);
     let html = "";
     for (let i = 0; i < movies.length; i++) {
+      movieIds.push(movies[i].id);
       html +=
         //   html += ` <div>
         //                     <h1>${movies[i].title}</h1>
@@ -26,33 +27,49 @@
                       <p class="title">${movies[i].title}</p>
                     </div>
                     <div class="btn-options">
-                      <button clas="btn-options" type="button">Options</button>
+                      <button class="btn" id="${movies[i].id}"  type="button" data="${movies[i].id}">Options</button>
                     </div>
                   </div>`;
     }
     contentLoad.innerHTML = html;
-    // addevent();
+    // console.log(document.querySelectorAll("button").data);
+    // document.body.addEventListener("click", function (event) {
+    //   if (event.target.id.length >= 1) {
+    //     console.log(movieIds);
+    //     hideCards();
+    //   } else if (event.target.id == "btn-close") {
+    //     showCards();
+    //   }
+    // });
   });
-
   const btnOptions = document.querySelector(".btn-options");
   const contentLoad = document.querySelector(".content-load");
   const contentDetail = document.querySelector(".content-detail");
-  const btnClose = document.querySelector(".btn-close");
+  const btnClose = document.querySelector("#btn-close");
+  const main = document.querySelector("#main");
 
-  btnOptions.addEventListener("click", () => {
+  // Shows movie cards
+  //   function showCards() {
+  //     contentLoad.classList.remove("opacity");
+  //     contentDetail.classList.add("hidden");
+  //   }
+
+  // Hides movie cards and show movie description card
+  function hideCards() {
     contentLoad.classList.add("opacity");
     contentDetail.classList.remove("hidden");
+  }
+
+  // eventListener on dyanmically created button
+  main.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn")) {
+      console.log("button clicked");
+      hideCards();
+    }
   });
 
   btnClose.addEventListener("click", () => {
     contentLoad.classList.remove("opacity");
     contentDetail.classList.add("hidden");
   });
-
-  //   function addevent() {
-  //     btnOptions.addEventListener("click", () => {
-  //       contentLoad.classList.add("opacity");
-  //       contentDetail.classList.remove("hidden");
-  //     });
-  //   }
 })();

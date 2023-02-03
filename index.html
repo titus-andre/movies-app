@@ -8,9 +8,9 @@
   <body>
     <div class="pagewrapper">
       <header class="header">
-        <h1 class="main-heading">Our Fun Time Movies</h1>
+        <h1 id="h1id" class="main-heading">Our Fun Time Movies</h1>
       </header>
-      <main class="main">
+      <main id="main" class="main">
         <div class="content content-load">
           <!-- <div class="cards card1">
             <div class="movie-image"></div>
@@ -55,7 +55,7 @@
                 <p class="run-time">3hrs</p>
                 <p class="category">Action</p>
               </div>
-              <button class="btn-close">Close</button>
+              <button id="btn-close">Close</button>
             </div>
           </div>
           <div class="lower-card">
@@ -72,7 +72,8 @@
       </main>
       <div id="movie"></div>
     </div>
-
+    <!--  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
     <!-- The core Firebase JS SDK and Databse library -->
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.5/firebase-firestore.js"></script>
@@ -85,6 +86,8 @@
 
     <!-- Your local JS file to add functions that interact with the database -->
     <script src="js/movies-api.js"></script>
+
+    <!-- JQuery -->
 
     <!-- Your local JS file to add functions that USE your functions from movies-api.js
     and INTERACT with the DOM -->
