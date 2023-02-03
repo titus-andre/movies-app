@@ -11,11 +11,11 @@
         <h1 id="h1id" class="main-heading">Our Fun Time Movies</h1>
       </header>
       <button class="add-btn">Add Movie</button><br />
-      <button class="remove-btn">Delete Movie</button>
+      <button class="update-btn">Update Movie</button>
 
       <main id="main" class="main">
         <!-- <form class="form"> -->
-        <div class="add-movie-form hidden">
+        <div class="add-movie-form form hidden">
           <div>
             <label class="label" for="title">Movie Title:</label>
             <input type="text" id="title" />
@@ -47,6 +47,42 @@
           </div>
           <div>
             <button type="submit" id="btn-submit">Submit</button>
+          </div>
+        </div>
+
+        <!-- update form -->
+        <div class="update-movie-form form hidden">
+          <div>
+            <label class="label" for="title">Movie Title:</label>
+            <input type="text" id="title-update" />
+          </div>
+
+          <div>
+            <label class="label" for="year">Year:</label>
+            <input type="text" id="year-update" />
+          </div>
+
+          <div>
+            <label class="label" for="director">Director(s):</label>
+            <input type="text" id="director-update" />
+          </div>
+
+          <div>
+            <label class="label" for="rating">Rating:</label>
+            <input type="number" id="rating-update" />
+          </div>
+
+          <div>
+            <label class="label" for="genre">Genre:</label>
+            <input type="text" id="genre-update" />
+          </div>
+
+          <div>
+            <label class="label" for="actors">Actors:</label>
+            <input type="text" id="actors-update" />
+          </div>
+          <div>
+            <button type="submit" id="btn-submit-update">Submit</button>
           </div>
         </div>
 

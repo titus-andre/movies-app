@@ -46,22 +46,22 @@ const getMovies = async () => {
 // Here is where you will create your own functions to further interact with the database.
 // HAPPY CODING!!!
 
-// const updateMovie = async (movie) => {
-//     try {
-//         const url = `/movies/${movie.id}`;
-//         const options = {
-//             method: 'PUT',
-//             headers: {
-//                 'Content-Type': 'application/json',
-//             },
-//             body: JSON.stringify(movie),
-//         };
-//         let response = await db.fetch(url, options);
-//         return await response.json();
-//     } catch (e) {
-//         console.error(e);
-//     }
-// }
+const updateMovie = async (movies) => {
+  try {
+    const url = `/movies/${movies.id}`;
+    const options = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(movies),
+    };
+    let response = await db.fetch(url, options);
+    return await response.json();
+  } catch (e) {
+    console.error(e);
+  }
+};
 
 const addMovie = async (movie) => {
   try {

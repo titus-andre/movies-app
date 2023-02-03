@@ -25,6 +25,10 @@
                       <button class="delete" type="button" data-id="${movies[i].id}">Delete Movie</button>
   
                       </div>
+                      <div>
+                      <button class="update" type="button" data-id="${movies[i].id}">Update</button>
+  
+                      </div>
                     </div>`;
       }
       contentLoad.innerHTML = html;
@@ -39,6 +43,17 @@
   const main = document.querySelector("#main");
   const input = document.querySelector("#input");
   const btnSubmit = document.querySelector("#btn-submit");
+  const title = document.querySelector("#title");
+  const year = document.querySelector("#year");
+  const director = document.querySelector("#director");
+  const rating = document.querySelector("#rating");
+  const genre = document.querySelector("#genre");
+  const actors = document.querySelector("#actors");
+  const addMovieForm = document.querySelector(".add-movie-form");
+  const addMoviebtn = document.querySelector(".add-btn");
+  const updateBtn = document.querySelector(".update-btn");
+  const updateMovieForm = document.querySelector(".update-movie-form");
+  const btnUpdateSubmit = document.querySelector("#btn-submit-update");
 
   // Hides movie cards and show movie description card
   function hideCards() {
@@ -58,8 +73,6 @@
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete")) {
       let dataId = e.target.getAttribute("data-id");
-      // console.log("button clicked");
-      // hideCards();
       deleteMovie(dataId);
     }
     refresh();
@@ -69,9 +82,6 @@
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn")) {
       let dataId = e.target.getAttribute("data-id");
-      // console.log("button clicked");
-      // hideCards();
-      deleteMovie(dataId);
     }
   });
 
@@ -80,15 +90,6 @@
     contentLoad.classList.remove("opacity");
     contentDetail.classList.add("hidden");
   });
-
-  const title = document.querySelector("#title");
-  const year = document.querySelector("#year");
-  const director = document.querySelector("#director");
-  const rating = document.querySelector("#rating");
-  const genre = document.querySelector("#genre");
-  const actors = document.querySelector("#actors");
-  const addMovieForm = document.querySelector(".add-movie-form");
-  const addMoviebtn = document.querySelector(".add-btn");
 
   //Add movie Submit button
   let count = 0;
@@ -124,20 +125,85 @@
 
     // contentDetail.classList.add("hidden");
   }
+
+  // show update movie form
+  function showUpdateForm() {
+    contentLoad.classList.add("opacity");
+    updateMovieForm.classList.remove("hidden");
+    // populateInput();
+  }
   // add movie button
   addMoviebtn.addEventListener("click", () => {
     showAddMovieForm();
   });
 
-  //
+  // popluate input fields
+  // populateInput();
 
-  // let movieObject2 = {
-  //   title: "this ids bullshit",
-  //   year: 1994,
-  //   director: "titus",
-  //   rating: 9.3,
-  //   runtime: 142,
-  //   genre: "Drama",
-  //   actors: "Tim Robbins, Morgan Freeman, Bob Gunton, William Sadler",
-  // };
+  let dataId;
+
+  let updateObj = {};
+  main.addEventListener("click", (e) => {
+    if (e.target.classList.contains("update")) {
+      dataId = e.target.getAttribute("data-id");
+
+      getMovies()
+        .then((movies) => {
+          // let moviez = document.querySelector("#movie");
+          let html = "";
+
+          for (let i = 0; i < movies.length; i++) {
+            if (movies[i].id === dataId) {
+              updateObj = {
+                title: (document.querySelector("#title-update").value =
+                  movies[i].title),
+                year: (document.querySelector("#title-update").value =
+                  movies[i].title),
+                director: (document.querySelector("#year-update").value =
+                  movies[i].year),
+                rating: (document.querySelector("#rating-update").value =
+                  movies[i].rating),
+                genre: (document.querySelector("#genre-update").value =
+                  movies[i].genre),
+                actors: (document.querySelector("#actors-update").value =
+                  movies[i].actors),
+              };
+              document.querySelector("#title-update").value = movies[i].title;
+              document.querySelector("#year-update").value = movies[i].year;
+              document.querySelector("#director-update").value =
+                movies[i].director;
+              document.querySelector("#rating-update").value = movies[i].rating;
+              document.querySelector("#genre-update").value = movies[i].genre;
+              document.querySelector("#actors-update").value = movies[i].actors;
+            }
+          }
+        })
+        .then(function () {
+          showUpdateForm();
+        });
+    }
+  });
+
+  ///////////
+  btnUpdateSubmit.addEventListener("click", (e) => {
+    e.preventDefault();
+    updateObj = {
+      title: document.querySelector("#title-update").value,
+      id: dataId,
+      year: document.querySelector("#year-update").value,
+      director: document.querySelector("#director-update").value,
+      rating: document.querySelector("#rating-update").value,
+      genre: document.querySelector("#genre-update").value,
+      actors: document.querySelector("#actors-update").value,
+    };
+
+    updateMovie(updateObj)
+      .then(function () {
+        contentLoad.classList.remove("opacity");
+        updateMovieForm.classList.add("hidden");
+      })
+      .then(function () {
+        refresh();
+      });
+  });
 })();
