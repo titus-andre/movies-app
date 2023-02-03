@@ -10,7 +10,47 @@
       <header class="header">
         <h1 id="h1id" class="main-heading">Our Fun Time Movies</h1>
       </header>
+      <button class="add-btn">Add Movie</button><br />
+      <button class="remove-btn">Delete Movie</button>
+
       <main id="main" class="main">
+        <!-- <form class="form"> -->
+        <div class="add-movie-form hidden">
+          <div>
+            <label class="label" for="title">Movie Title:</label>
+            <input type="text" id="title" />
+          </div>
+
+          <div>
+            <label class="label" for="year">Year:</label>
+            <input type="text" id="year" />
+          </div>
+
+          <div>
+            <label class="label" for="director">Director(s):</label>
+            <input type="text" id="director" />
+          </div>
+
+          <div>
+            <label class="label" for="rating">Rating:</label>
+            <input type="number" id="rating" />
+          </div>
+
+          <div>
+            <label class="label" for="genre">Genre:</label>
+            <input type="text" id="genre" />
+          </div>
+
+          <div>
+            <label class="label" for="actors">Actors:</label>
+            <input type="text" id="actors" />
+          </div>
+          <div>
+            <button type="submit" id="btn-submit">Submit</button>
+          </div>
+        </div>
+
+        <!-- </form> -->
         <div class="content content-load">
           <!-- <div class="cards card1">
             <div class="movie-image"></div>
@@ -55,7 +95,7 @@
                 <p class="run-time">3hrs</p>
                 <p class="category">Action</p>
               </div>
-              <button id="btn-close">Close</button>
+              <button id="btn-close" data-moveId="this-di">Close</button>
             </div>
           </div>
           <div class="lower-card">
