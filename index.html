@@ -11,7 +11,6 @@
         <h1 id="h1id" class="main-heading">Our Fun Time Movies</h1>
       </header>
       <button class="add-btn">Add Movie</button><br />
-      <button class="update-btn">Update Movie</button>
 
       <main id="main" class="main">
         <!-- <form class="form"> -->
@@ -44,6 +43,19 @@
           <div>
             <label class="label" for="actors">Actors:</label>
             <input type="text" id="actors" />
+          </div>
+          <div>
+            <label class="label" for="image">Image:</label>
+            <input type="text" id="image" />
+          </div>
+          <div>
+            <label class="label" for="text-area">Description:</label>
+            <textarea
+              name="description"
+              id="description"
+              cols="30"
+              rows="5"
+            ></textarea>
           </div>
           <div>
             <button type="submit" id="btn-submit">Submit</button>
@@ -80,6 +92,19 @@
           <div>
             <label class="label" for="actors">Actors:</label>
             <input type="text" id="actors-update" />
+          </div>
+          <div>
+            <label class="label" for="image">Image:</label>
+            <input type="text" id="image-update" />
+          </div>
+          <div>
+            <label class="label" for="text-area">Description:</label>
+            <textarea
+              name="description"
+              id="description-update"
+              cols="30"
+              rows="5"
+            ></textarea>
           </div>
           <div>
             <button type="submit" id="btn-submit-update">Submit</button>
@@ -122,7 +147,7 @@
 
         <!-- Hidden Card -->
         <div class="content-detail hidden" id="hidden">
-          <div class="upper-card">
+          <!-- <div class="upper-card">
             <div class="detail-image"></div>
             <div class="detail-content">
               <h4 class="detail-title">Matrix</h4>
@@ -143,7 +168,7 @@
             </div>
             <div class="director">Andre</div>
             <div class="rating">5 stars</div>
-          </div>
+          </div> -->
         </div>
       </main>
       <div id="movie"></div>

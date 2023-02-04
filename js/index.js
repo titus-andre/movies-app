@@ -2,34 +2,39 @@
   // This is the entry point for your application. Write all of your code here.
   // Before you can use the database, you need to configure the "db" object
   // with your team name in the "js/movies-api.js" file.
-  const movieIds = [];
+
+  // const movieIds = [];
 
   refresh();
 
   function refresh() {
     getMovies().then((movies) => {
-      let moviez = document.querySelector("#movie");
+      console.log(movies);
       let html = "";
       for (let i = 0; i < movies.length; i++) {
-        movieIds.push(movies[i].id);
-        html += ` <div class="cards ">
-                      <div class="movie-image"></div>
-                      <div class="card-content">
-                        <p class="rating"><span class="star">⭐️</span>${movies[i].rating}</p>
-                        <p class="title">${movies[i].title}</p>
-                      </div>
-                      <div class="btn-options">
-                        <button class="btn" id=""  type="button" data-id="${movies[i].id}">Options</button>
-                      </div>
-                      <div>
-                      <button class="delete" type="button" data-id="${movies[i].id}">Delete Movie</button>
-  
-                      </div>
-                      <div>
-                      <button class="update" type="button" data-id="${movies[i].id}">Update</button>
-  
-                      </div>
-                    </div>`;
+        // movieIds.push(movies[i].id);
+        html += ` 
+              <div class="cards ">
+                <div class="movie-image">
+                  <img src="${movies[i].image}" alt="shawshank" />
+                </div>
+                <div class="card-content">
+                  <p class="rating"><span class="star">⭐️</span>${movies[i].rating}</p>
+                  <p class="title">${movies[i].title}</p>
+                </div>
+                <div class="btn-container">
+                  <div class="btn-options">
+                    <button class="btn" id=""  type="button" data-id="${movies[i].id}">Details</button>
+                  </div>
+                  <div>
+                    <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
+                  </div>
+                  <div>
+                    <button class="update" type="button" data-id="${movies[i].id}">Update</button>
+                  </div>
+                </div>
+              </div>
+                  `;
       }
       contentLoad.innerHTML = html;
     });
@@ -39,7 +44,7 @@
   const btnOptions = document.querySelector(".btn-options");
   const contentLoad = document.querySelector(".content-load");
   const contentDetail = document.querySelector(".content-detail");
-  const btnClose = document.querySelector("#btn-close");
+  const btnClose = document.querySelector(".btn-close");
   const main = document.querySelector("#main");
   const input = document.querySelector("#input");
   const btnSubmit = document.querySelector("#btn-submit");
@@ -54,20 +59,53 @@
   const updateBtn = document.querySelector(".update-btn");
   const updateMovieForm = document.querySelector(".update-movie-form");
   const btnUpdateSubmit = document.querySelector("#btn-submit-update");
+  const imageAdd = document.querySelector("#image");
+  const imageUpdate = document.querySelector("#image-update");
+
+  // eventListener on dyanmically created button
+  main.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn")) {
+      dataId = e.target.getAttribute("data-id");
+      hideCards();
+    }
+  });
 
   // Hides movie cards and show movie description card
   function hideCards() {
     contentLoad.classList.add("opacity");
     contentDetail.classList.remove("hidden");
-  }
 
-  // eventListener on dyanmically created button
-  main.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn")) {
-      // console.log("button clicked");
-      hideCards();
-    }
-  });
+    getMovies().then((movies) => {
+      let html = "";
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].id === dataId) {
+          // movieIds.push(movies[i].id);
+          html += ` 
+                  <div class="upper-card">
+                      <div class="detail-image">
+                      <img src="${movies[i].image}" />
+                      </div>
+                      <div class="detail-content">
+                        <h4 class="detail-title">${movies[i].title}</h4>
+                        <div class="stats">
+                          <p class="date">Year: ${movies[i].year}</p>
+                          <p class="run-time">Run-time ${movies[i].runtime} min.</p>
+                          <p class="category">Genre: ${movies[i].genre}</p>
+                        </div>
+                        <button class="btn-close" data-moveId="this-id">Close</button>
+                      </div>
+                    </div>
+                    <div class="lower-card">
+                      
+                      <div class="director">Director: ${movies[i].director}</div>
+                      <div class="rating"><span class="star">⭐️ </span>${movies[i].rating} stars</div>
+                    </div>
+                    <p class="description">Synopsis: ${movies[i].description}</p>`;
+        }
+      }
+      contentDetail.innerHTML = html;
+    });
+  }
 
   // eventListener on dyn. delete button
   main.addEventListener("click", (e) => {
@@ -86,9 +124,11 @@
   });
 
   // closes detail card
-  btnClose.addEventListener("click", () => {
-    contentLoad.classList.remove("opacity");
-    contentDetail.classList.add("hidden");
+  main.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn-close")) {
+      contentLoad.classList.remove("opacity");
+      contentDetail.classList.add("hidden");
+    }
   });
 
   //Add movie Submit button
@@ -103,6 +143,7 @@
       rating: rating.value,
       genre: genre.value,
       actors: actors.value,
+      image: image.value,
     };
     addMovie(newMovie).then(function () {
       hideMovieForm();
@@ -114,34 +155,27 @@
   function showAddMovieForm() {
     contentLoad.classList.add("opacity");
     addMovieForm.classList.remove("hidden");
-
-    // contentDetail.classList.add("hidden");
   }
 
   // fucntion hides form
   function hideMovieForm() {
     contentLoad.classList.remove("opacity");
     addMovieForm.classList.add("hidden");
-
-    // contentDetail.classList.add("hidden");
   }
 
   // show update movie form
   function showUpdateForm() {
     contentLoad.classList.add("opacity");
     updateMovieForm.classList.remove("hidden");
-    // populateInput();
   }
+
   // add movie button
   addMoviebtn.addEventListener("click", () => {
     showAddMovieForm();
   });
 
-  // popluate input fields
-  // populateInput();
-
+  // EventListener to populate update form with movie info
   let dataId;
-
   let updateObj = {};
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("update")) {
@@ -157,16 +191,21 @@
               updateObj = {
                 title: (document.querySelector("#title-update").value =
                   movies[i].title),
-                year: (document.querySelector("#title-update").value =
-                  movies[i].title),
-                director: (document.querySelector("#year-update").value =
+                year: (document.querySelector("#year-update").value =
                   movies[i].year),
+                director: (document.querySelector("#director-update").value =
+                  movies[i].director),
                 rating: (document.querySelector("#rating-update").value =
                   movies[i].rating),
                 genre: (document.querySelector("#genre-update").value =
                   movies[i].genre),
                 actors: (document.querySelector("#actors-update").value =
                   movies[i].actors),
+                image: (document.querySelector("#image-update").value =
+                  movies[i].image),
+                description: (document.querySelector(
+                  "#description-update"
+                ).value = movies[i].description),
               };
               document.querySelector("#title-update").value = movies[i].title;
               document.querySelector("#year-update").value = movies[i].year;
@@ -175,6 +214,9 @@
               document.querySelector("#rating-update").value = movies[i].rating;
               document.querySelector("#genre-update").value = movies[i].genre;
               document.querySelector("#actors-update").value = movies[i].actors;
+              document.querySelector("#image-update").value = movies[i].image;
+              document.querySelector("#description-update").value =
+                movies[i].description;
             }
           }
         })
@@ -195,6 +237,8 @@
       rating: document.querySelector("#rating-update").value,
       genre: document.querySelector("#genre-update").value,
       actors: document.querySelector("#actors-update").value,
+      image: document.querySelector("#image-update").value,
+      description: document.querySelector("#description-update").value,
     };
 
     updateMovie(updateObj)
