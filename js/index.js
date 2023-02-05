@@ -62,6 +62,7 @@
   const btnUpdateSubmit = document.querySelector("#btn-submit-update");
   const imageAdd = document.querySelector("#image");
   const imageUpdate = document.querySelector("#image-update");
+  const runtime = document.querySelector("#run-time");
 
   // eventListener on dyanmically created button
   main.addEventListener("click", (e) => {
