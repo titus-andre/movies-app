@@ -3,43 +3,58 @@
   <head>
     <meta charset="UTF-8" />
     <title>Movies App</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Flex:opsz,wght@8..144,400;8..144,700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
   <body>
     <div class="pagewrapper">
       <header class="header">
-        <h1 id="h1id" class="main-heading">Our Fun Time Movies</h1>
+        <h1 id="h1id" class="main-heading">Bootleggers Movie Emporium</h1>
       </header>
       <button class="add-btn">Add Movie</button><br />
-
       <main id="main" class="main">
-        <!-- <form class="form"> -->
+        <!-- Add Movie Form -->
         <div class="add-movie-form form hidden">
           <div>
             <label class="label" for="title">Movie Title:</label>
             <input type="text" id="title" />
           </div>
-
           <div>
             <label class="label" for="year">Year:</label>
             <input type="text" id="year" />
           </div>
-
           <div>
             <label class="label" for="director">Director(s):</label>
             <input type="text" id="director" />
           </div>
-
           <div>
             <label class="label" for="rating">Rating:</label>
             <input type="number" id="rating" />
           </div>
-
           <div>
             <label class="label" for="genre">Genre:</label>
             <input type="text" id="genre" />
           </div>
-
+          <div>
+            <label class="label" for="run-time">Run-time:</label>
+            <input type="text" id="run-time" value="hrs  min" />
+          </div>
           <div>
             <label class="label" for="actors">Actors:</label>
             <input type="text" id="actors" />
@@ -62,33 +77,32 @@
           </div>
         </div>
 
-        <!-- update form -->
+        <!-- Update Movie Form -->
         <div class="update-movie-form form hidden">
           <div>
             <label class="label" for="title">Movie Title:</label>
             <input type="text" id="title-update" />
           </div>
-
           <div>
             <label class="label" for="year">Year:</label>
             <input type="text" id="year-update" />
           </div>
-
           <div>
             <label class="label" for="director">Director(s):</label>
             <input type="text" id="director-update" />
           </div>
-
           <div>
             <label class="label" for="rating">Rating:</label>
             <input type="number" id="rating-update" />
           </div>
-
           <div>
-            <label class="label" for="genre">Genre:</label>
+            <label class="label" for="genre">Genre(s):</label>
             <input type="text" id="genre-update" />
           </div>
-
+          <div>
+            <label class="label" for="run-time">Run-time:</label>
+            <input type="text" id="run-time-update" />
+          </div>
           <div>
             <label class="label" for="actors">Actors:</label>
             <input type="text" id="actors-update" />
@@ -111,7 +125,7 @@
           </div>
         </div>
 
-        <!-- </form> -->
+        <!-- Movies on page load -->
         <div class="content content-load">
           <!-- <div class="cards card1">
             <div class="movie-image"></div>
@@ -145,7 +159,7 @@
           </div> -->
         </div>
 
-        <!-- Hidden Card -->
+        <!-- Hidden/Movie Detail Card-->
         <div class="content-detail hidden" id="hidden">
           <!-- <div class="upper-card">
             <div class="detail-image"></div>

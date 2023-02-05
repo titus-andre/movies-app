@@ -19,7 +19,7 @@
                   <img src="${movies[i].image}" alt="shawshank" />
                 </div>
                 <div class="card-content">
-                  <p class="rating"><span class="star">⭐️</span>${movies[i].rating}</p>
+                  <p class="rating"><span class="star">⭐️</span>  ${movies[i].rating}<span class="rating-max"> / 10</span></p>
                   <p class="title">${movies[i].title}</p>
                 </div>
                 <div class="btn-container">
@@ -27,11 +27,12 @@
                     <button class="btn" id=""  type="button" data-id="${movies[i].id}">Details</button>
                   </div>
                   <div>
-                    <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
-                  </div>
-                  <div>
                     <button class="update" type="button" data-id="${movies[i].id}">Update</button>
                   </div>
+                  <div>
+                    <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
+                  </div>
+                  
                 </div>
               </div>
                   `;
@@ -88,19 +89,20 @@
                       <div class="detail-content">
                         <h4 class="detail-title">${movies[i].title}</h4>
                         <div class="stats">
-                          <p class="date">Year: ${movies[i].year}</p>
-                          <p class="run-time">Run-time ${movies[i].runtime} min.</p>
-                          <p class="category">Genre: ${movies[i].genre}</p>
+                          <p class="date"><span class="colon" >Year:</span>  ${movies[i].year}</p>
+                          <p class="run-time"><span class="colon" >Run-time:</span>  ${movies[i].runtime}</p>
+                          <p class="category"><span class="colon" >Genre:</span>  ${movies[i].genre}</p>
                         </div>
-                        <button class="btn-close" data-moveId="this-id">Close</button>
+                        <button class="btn-close" data-moveId="this-id"> x </button>
                       </div>
                     </div>
                     <div class="lower-card">
+                    <p class="rating rating-detail"><span class="star">⭐️</span>  ${movies[i].rating}<span class="rating-max"> / 10</span></p>
+                      <div class="director"><span class="colon" >Director:</span>  ${movies[i].director}</div>
                       
-                      <div class="director">Director: ${movies[i].director}</div>
-                      <div class="rating"><span class="star">⭐️ </span>${movies[i].rating} stars</div>
-                    </div>
-                    <p class="description">Synopsis: ${movies[i].description}</p>`;
+                      <div class="actor"><span class="colon" >Actors:</span>  ${movies[i].actors}</div>
+                    
+                    <p class="description"><span class="colon" >Synopsis:</span>  ${movies[i].description}</p>`;
         }
       }
       contentDetail.innerHTML = html;
@@ -140,8 +142,10 @@
       title: title.value,
       year: year.value,
       director: director.value,
+      actors: actors.value,
       rating: rating.value,
       genre: genre.value,
+      runtime: runtime.value,
       actors: actors.value,
       image: image.value,
     };
@@ -199,6 +203,8 @@
                   movies[i].rating),
                 genre: (document.querySelector("#genre-update").value =
                   movies[i].genre),
+                runtime: (document.querySelector("#run-time-update").value =
+                  movies[i].runtime),
                 actors: (document.querySelector("#actors-update").value =
                   movies[i].actors),
                 image: (document.querySelector("#image-update").value =
@@ -213,6 +219,8 @@
                 movies[i].director;
               document.querySelector("#rating-update").value = movies[i].rating;
               document.querySelector("#genre-update").value = movies[i].genre;
+              document.querySelector("#run-time-update").value =
+                movies[i].runtime;
               document.querySelector("#actors-update").value = movies[i].actors;
               document.querySelector("#image-update").value = movies[i].image;
               document.querySelector("#description-update").value =
@@ -236,6 +244,7 @@
       director: document.querySelector("#director-update").value,
       rating: document.querySelector("#rating-update").value,
       genre: document.querySelector("#genre-update").value,
+      runtime: document.querySelector("#run-time-update").value,
       actors: document.querySelector("#actors-update").value,
       image: document.querySelector("#image-update").value,
       description: document.querySelector("#description-update").value,
