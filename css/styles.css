@@ -12,6 +12,7 @@
   --clr-text-light: #c4c4c4;
   --clr-card-btn-hover: #434242;
   --clr-card: #202020;
+  --clr-gold: #f5c519;
 }
 
 body {
@@ -37,7 +38,7 @@ body {
   text-shadow: 5px 5px rgba(79, 79, 79, 0.862);
 
   /* color: rgb(19, 17, 17); */
-  color: #f5c519;
+  color: var(--clr-gold);
   text-shadow: 5px 5px black;
 }
 
@@ -200,6 +201,27 @@ img {
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
 }
 
+.search-form {
+  left: 50%;
+  top: 50%;
+  height: 280px;
+  width: 350px;
+  text-align: left;
+  position: fixed;
+  margin-left: -290px;
+  margin-top: -120px;
+}
+
+.search-form input {
+  width: 200px;
+}
+
+.search-form-btn-cont {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
 .btn-container-form {
   display: flex;
   gap: 1rem;
@@ -226,16 +248,24 @@ textarea {
 
 /* Searchbar submit/cancel buttons */
 #search-btn,
-#cancel-search {
+#cancel-search,
+#search-form-btn,
+#clear-results-btn {
   border: none;
   border-radius: 5px;
   padding: 5px;
-  background-color: #f5c519;
   cursor: pointer;
+  background-color: var(--clr-gold);
   font-weight: bold;
   color: black;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
   margin: 0 0.5rem;
+}
+
+/* Search Form buttons */
+.search-form-btn {
+  text-align: center;
+  margin-top: 1rem;
 }
 
 /* Detail/Update/Delet buttons */
@@ -251,6 +281,8 @@ textarea {
 .content button:hover,
 .form-btn:hover {
   cursor: pointer;
+  color: var(--clr-gold);
+  border-color: var(--clr-gold);
   background-color: var(--clr-card-btn-hover);
 }
 
@@ -276,26 +308,26 @@ textarea {
   border-radius: 50px;
   border: none;
 
-  background-color: #f5c519;
-  /* background: var(--clr-card); */
+  background-color: var(--clr-gold);
   cursor: pointer;
   font-weight: bold;
   color: black;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
 }
 
-.add-btn:hover {
+.add-btn:hover,
+#search-btn:hover,
+#cancel-search:hover {
   background-color: var(--clr-card-btn-hover);
   color: white;
 }
 
 .cancel-btn1:hover,
 .cancel-btn2:hover {
-  /* color: red; */
   border: 1px solid red;
 }
 
-/* Searchbar */
+/* Searchbar ----------------------------*/
 #searchbar-container {
   text-align: center;
 }
@@ -303,17 +335,23 @@ textarea {
 #searchBar {
   height: 25px;
   border-radius: 5px;
-  border: none;
+  font-size: 1rem;
+  background-color: #9f8c8cac;
+}
+
+#searchBar:focus {
+  background-color: #9f8c8cac;
 }
 
 .searchbar-label {
-  color: #f5c519;
-
+  display: inline-block;
+  font-weight: bold;
+  width: 150px;
+  color: var(--clr-gold);
   font-size: 1.5rem;
   text-shadow: 2.7px 2.7px black;
 }
 
-/* Hidden display */
 .hidden {
   display: none;
 }

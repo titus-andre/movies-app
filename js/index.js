@@ -1,52 +1,51 @@
+"use strict";
+
 (async () => {
   // This is the entry point for your application. Write all of your code here.
   // Before you can use the database, you need to configure the "db" object
   // with your team name in the "js/movies-api.js" file.
 
-  // const movieIds = [];
-
   refresh();
+
+  function htmlTemplate(movie) {
+    return ` 
+            <div class="cards ">
+              <div class="movie-image">
+                <img src="${movie.image}" alt="shawshank" />
+              </div>
+              <div class="card-content">
+                <p class="rating"><span class="star">⭐️</span>  ${movie.rating}<span class="rating-max"> / 10</span></p>
+                <p class="title">${movie.title}</p>
+              </div>
+              <div class="btn-container">
+                <div class="btn-options">
+                  <button class="btn" id=""  type="button" data-id="${movie.id}">Details</button>
+                </div>
+                <div>
+                  <button class="update" type="button" data-id="${movie.id}">Update</button>
+                </div>
+                <div>
+                  <button class="delete" type="button" data-id="${movie.id}">Delete</button>
+                </div>
+                
+              </div>
+            </div>
+                `;
+  }
 
   function refresh() {
     getMovies().then((movies) => {
-      console.log(movies);
       let html = "";
       for (let i = 0; i < movies.length; i++) {
-        html += `
-              <div class="cards ">
-                <div class="movie-image">
-                  <img src="${movies[i].image}" alt="shawshank" />
-                </div>
-                <div class="card-content">
-                  <p class="rating"><span class="star">⭐️</span>  ${movies[i].rating}<span class="rating-max"> / 10</span></p>
-                  <p class="title">${movies[i].title}</p>
-                </div>
-                <div class="btn-container">
-                  <div class="btn-options">
-                    <button class="btn" id=""  type="button" data-id="${movies[i].id}">Details</button>
-                  </div>
-                  <div>
-                    <button class="update" type="button" data-id="${movies[i].id}">Update</button>
-                  </div>
-                  <div>
-                    <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
-                  </div>
-
-                </div>
-              </div>
-                  `;
+        html += htmlTemplate(movies[i]);
       }
       contentLoad.innerHTML = html;
     });
-    console.log("on submit");
   }
 
-  const btnOptions = document.querySelector(".btn-options");
   const contentLoad = document.querySelector(".content-load");
   const contentDetail = document.querySelector(".content-detail");
-  const btnClose = document.querySelector(".btn-close");
   const main = document.querySelector("#main");
-  const input = document.querySelector("#input");
   const btnSubmit = document.querySelector("#btn-submit");
   const title = document.querySelector("#title");
   const year = document.querySelector("#year");
@@ -56,57 +55,37 @@
   const actors = document.querySelector("#actors");
   const addMovieForm = document.querySelector(".add-movie-form");
   const addMoviebtn = document.querySelector(".add-btn");
-  const updateBtn = document.querySelector(".update-btn");
   const updateMovieForm = document.querySelector(".update-movie-form");
   const btnUpdateSubmit = document.querySelector("#btn-submit-update");
-  const imageAdd = document.querySelector("#image");
-  const imageUpdate = document.querySelector("#image-update");
   const runtime = document.querySelector("#run-time");
 
-  // Search Bar
+  // Search Bar ----------------------------|
   const searchInput = document.querySelector("#searchBar");
   const searchBtn = document.querySelector("#search-btn");
+  const searchCanBtn = document.querySelector("#cancel-search");
 
+  // Function to render results user input from search bar ----|
   function populate() {
     getMovies().then((movies) => {
-      // console.log(movies)
       const movieSearch = searchInput.value.toLowerCase();
       console.log(movieSearch);
       let html = "";
       for (let i = 0; i < movies.length; i++) {
-        if (movies[i].title.toLowerCase().includes(movieSearch))
-          html += ` 
-            <div class="cards ">
-              <div class="movie-image">
-                <img src="${movies[i].image}" alt="shawshank" />
-              </div>
-              <div class="card-content">
-                <p class="rating"><span class="star">⭐️</span>  ${movies[i].rating}<span class="rating-max"> / 10</span></p>
-                <p class="title">${movies[i].title}</p>
-              </div>
-              <div class="btn-container">
-                <div class="btn-options">
-                  <button class="btn" id=""  type="button" data-id="${movies[i].id}">Details</button>
-                </div>
-                <div>
-                  <button class="update" type="button" data-id="${movies[i].id}">Update</button>
-                </div>
-                <div>
-                  <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
-                </div>
-                
-              </div>
-            </div>
-                `;
+        if (movies[i].title.toLowerCase().includes(movieSearch)) {
+          html += htmlTemplate(movies[i]);
+        }
       }
       contentLoad.innerHTML = html;
     });
   }
 
-  //
+  // EventList. for Find btn (calls search bar function)
   searchBtn.addEventListener("click", populate);
+  searchCanBtn.addEventListener("click", () => {
+    searchInput.value = "";
+  });
 
-  // eventListener on dyanmically created button
+  // EventListener on dyanmically created button ---------------|
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn")) {
       dataId = e.target.getAttribute("data-id");
@@ -114,7 +93,7 @@
     }
   });
 
-  // Hides movie cards and show movie details
+  // Hides movie cards and show movie details ---------------|
   function hideCards() {
     contentLoad.classList.add("opacity");
     contentDetail.classList.remove("hidden");
@@ -123,7 +102,6 @@
       let html = "";
       for (let i = 0; i < movies.length; i++) {
         if (movies[i].id === dataId) {
-          // movieIds.push(movies[i].id);
           html += ` 
                   <div class="upper-card">
                       <div class="detail-image">
@@ -152,23 +130,28 @@
     });
   }
 
-  // eventListener on dyn. delete button
+  // EventListener on dyn. delete button ---------------|
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("delete")) {
       let dataId = e.target.getAttribute("data-id");
-      deleteMovie(dataId);
+      let response = prompt("Are you sure you want to delete");
+      if (response === "yes") {
+        deleteMovie(dataId);
+        refresh();
+      } else {
+        refresh();
+      }
     }
-    refresh();
   });
 
-  // gets movie id from options button click
+  // Gets movie id from options button click -------------|
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn")) {
       let dataId = e.target.getAttribute("data-id");
     }
   });
 
-  // closes detail card
+  // Closes detail card -----------------|
   main.addEventListener("click", (e) => {
     if (e.target.classList.contains("btn-close")) {
       contentLoad.classList.remove("opacity");
@@ -176,7 +159,7 @@
     }
   });
 
-  //Add movie Submit button
+  // Add movie Submit button ---------------|
   let count = 0;
   btnSubmit.addEventListener("click", (e) => {
     e.preventDefault();
@@ -198,30 +181,30 @@
     });
   });
 
-  // fucntion shows form
+  // Fucntion displays Form ---------------|
   function showAddMovieForm() {
     contentLoad.classList.add("opacity");
     addMovieForm.classList.remove("hidden");
   }
 
-  // fucntion hides form
+  // Fucntion Hides form ---------------|
   function hideMovieForm() {
     contentLoad.classList.remove("opacity");
     addMovieForm.classList.add("hidden");
   }
 
-  // show update movie form
+  // Show Update Movie Form ---------------|
   function showUpdateForm() {
     contentLoad.classList.add("opacity");
     updateMovieForm.classList.remove("hidden");
   }
 
-  // add movie button
+  // Button to add movies ---------------|
   addMoviebtn.addEventListener("click", () => {
     showAddMovieForm();
   });
 
-  // EventListener to populate update form with movie info
+  // EventListener that populates update form with movie details ----|
   let dataId;
   let updateObj = {};
   main.addEventListener("click", (e) => {
@@ -230,8 +213,6 @@
 
       getMovies()
         .then((movies) => {
-          // let html = "";
-
           for (let i = 0; i < movies.length; i++) {
             if (movies[i].id === dataId) {
               updateObj = {
@@ -276,7 +257,7 @@
     }
   });
 
-  ///////////
+  // Eventlistener on Submit button within Update Form ------------|
   btnUpdateSubmit.addEventListener("click", (e) => {
     e.preventDefault();
     updateObj = {
@@ -302,19 +283,85 @@
       });
   });
 
-  //Cancel Buttons
+  //Cancel Button element variables ---------------|
 
   const cancelBtn1 = document.querySelector(".cancel-btn1");
   const cancelBtn2 = document.querySelector(".cancel-btn2");
 
-  // closes Update Form
+  // EventList. for cancel btn that closes Update Form ---------------|
   cancelBtn2.addEventListener("click", () => {
     contentLoad.classList.remove("opacity");
     updateMovieForm.classList.add("hidden");
   });
 
+  // EventList. for cancel btn that closes Add-Movie Form ------------|
+
   cancelBtn1.addEventListener("click", () => {
     contentLoad.classList.remove("opacity");
     addMovieForm.classList.add("hidden");
+  });
+
+  // Search Bar --------------------------|
+  const searchMovies = document.querySelector("#search-form-btn");
+  const searchForm = document.querySelector(".search-form");
+  const submitFormBtn = document.querySelector("#submit-form-btn");
+  const cancelFormBtn = document.querySelector("#cancel-form-btn");
+
+  // EventList. for searchbar Find btn ----------------------|
+  searchMovies.addEventListener("click", () => {
+    contentLoad.classList.add("opacity");
+    searchForm.classList.remove("hidden");
+  });
+
+  // EventList. for Submit Search Form btn ----------------------|
+  submitFormBtn.addEventListener("click", () => {
+    contentLoad.classList.remove("opacity");
+    searchForm.classList.add("hidden");
+  });
+
+  // EventList. for Cancel Search Form btn ----------------------|
+
+  cancelFormBtn.addEventListener("click", () => {
+    contentLoad.classList.remove("opacity");
+    searchForm.classList.add("hidden");
+  });
+
+  // Variables for Search Form elements ----------------------|
+  const yearSearch = document.querySelector("#year-search");
+  const directorSearch = document.querySelector("#director-search");
+  const ratingSearch = document.querySelector("#rating-search");
+  const genreSearch = document.querySelector("#genre-search");
+  const actorsSearch = document.querySelector("#actors-search");
+  const clearResultsBtn = document.querySelector("#clear-results-btn");
+
+  // Function that populates results from user input within Search Form-
+  function search() {
+    getMovies().then((movies) => {
+      const yearSearchValue = yearSearch.value.toLowerCase();
+      const directorSearchValue = directorSearch.value.toLowerCase();
+      const ratingSearchValue = ratingSearch.value.toLowerCase();
+      const genreSearchValue = genreSearch.value.toLowerCase();
+      const actorsSearchValue = actorsSearch.value.toLowerCase();
+
+      let html = "";
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].actors.toLowerCase().includes(actorsSearchValue))
+          if (movies[i].director.toLowerCase().includes(directorSearchValue))
+            if (movies[i].rating >= ratingSearchValue)
+              if (movies[i].year.includes(yearSearchValue))
+                if (movies[i].genre.toLowerCase().includes(genreSearchValue)) {
+                  html += htmlTemplate(movies[i]);
+                }
+      }
+      contentLoad.innerHTML = html;
+    });
+  }
+
+  // EventList. for Submit button within Search Form
+  submitFormBtn.addEventListener("click", search);
+
+  // Clears search results
+  clearResultsBtn.addEventListener("click", () => {
+    refresh();
   });
 })();
