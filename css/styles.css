@@ -274,7 +274,8 @@ textarea {
   color: white;
 }
 
-.cancel-btn:hover {
+.cancel-btn1:hover,
+.cancel-btn2:hover {
   /* color: red; */
   border: 1px solid red;
 }

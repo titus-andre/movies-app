@@ -263,16 +263,17 @@
       });
   });
 
-  const cancelBtn = document.querySelector(".cancel-btn");
+  const cancelBtn1 = document.querySelector(".cancel-btn1");
+  const cancelBtn2 = document.querySelector(".cancel-btn2");
 
   // closes Update Form
-  cancelBtn.addEventListener("click", () => {
-    if (!updateMovieForm.classList.contains("hidden")) {
-      contentLoad.classList.remove("opacity");
-      updateMovieForm.classList.add("hidden");
-    } else if (!addMovieForm.classList.contains("hidden")) {
-      contentLoad.classList.remove("opacity");
-      addMovieForm.classList.add("hidden");
-    }
+  cancelBtn2.addEventListener("click", () => {
+    contentLoad.classList.remove("opacity");
+    updateMovieForm.classList.add("hidden");
+  });
+
+  cancelBtn1.addEventListener("click", () => {
+    contentLoad.classList.remove("opacity");
+    addMovieForm.classList.add("hidden");
   });
 })();
