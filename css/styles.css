@@ -3,19 +3,28 @@
   padding: 0;
 }
 
-/* Fonts */
+:root {
+  /* Fonts */
+  --ff-roboto: "Roboto Flex", sans-serif;
+  --ff-title: "Limelight", cursive;
+
+  /* Palette */
+  --clr-text-light: #c4c4c4;
+  --clr-card-btn-hover: #434242;
+  --clr-card: #202020;
+}
+
 body {
-  font-family: "Roboto Flex", sans-serif;
+  font-family: var(--ff-roboto);
   background-image: linear-gradient(
       to right bottom,
       rgba(128, 128, 128, 0.674),
-      /* rgba(45, 45, 113, 0.435) */ rgba(255, 254, 254, 0.624)
+      rgba(255, 254, 254, 0.624)
     ),
     url("../img/bootleggers.jpg");
-  object-fit: cover;
+  background-size: cover;
   background-attachment: fixed;
 }
-/* Colors */
 
 .pagewrapper {
   height: 100vh;
@@ -25,14 +34,15 @@ body {
 .header {
   text-align: center;
   margin-bottom: 4rem;
-  font-size: 2.5rem;
-  font-family: "Bebas Neue", cursive;
-  text-shadow: 5px 5px rgba(107, 107, 107, 0.862);
-  /* position: static; */
+  margin-top: 1rem;
+  font-size: 2.8rem;
+  font-family: var(--ff-title);
+  letter-spacing: 1px;
+  text-shadow: 5px 5px rgba(79, 79, 79, 0.862);
+  color: rgb(19, 17, 17);
 }
 
 .main {
-  /* display: ; */
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -40,46 +50,14 @@ body {
   gap: 3rem;
 }
 
-.add-btn {
-  position: fixed;
-  bottom: 2%;
-  right: 2%;
-  padding: 10px 15px;
-  border-radius: 50px;
-  border: none;
-  background: #202020;
-  cursor: pointer;
-  font-weight: bold;
-  color: white;
-  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
-}
-
-.add-btn:hover {
-  background-color: #434242;
-  color: white;
-}
-
-/* Cards */
+/* Cards -----------------------*/
 .content {
   display: flex;
   gap: 3rem;
   width: 944px;
   flex-wrap: wrap;
-  color: #c4c4c4;
+  color: var(--clr-text-light);
   margin-bottom: 3rem;
-}
-
-.content button {
-  border: 0.5px solid #c4c4c4;
-  padding: 4px 7px;
-  color: white;
-  background-color: #202020;
-  border-radius: 50px;
-}
-
-.content button:hover {
-  cursor: pointer;
-  background-color: #434242;
 }
 
 .cards {
@@ -88,11 +66,10 @@ body {
   width: 200px;
   height: 410px;
   margin-top: 1.5rem;
-  background-color: #202020;
+  background-color: var(--clr-card);
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
 }
 
-/* Front-Card Content */
 .movie-image {
   width: 200px;
   height: 280px;
@@ -123,15 +100,7 @@ img {
 
 .rating-max {
   font-size: 10px;
-  color: #c4c4c4;
-}
-
-/* .content-load {
-  opacity: 0.2;
-} */
-
-.opacity {
-  opacity: 0.1;
+  color: var(--clr-text-light);
 }
 
 .btn-container {
@@ -140,24 +109,32 @@ img {
   margin-top: 20px;
 }
 
-.content-detail {
-  position: relative;
+/* Card blur --------------------*/
+.opacity {
+  filter: blur(3px);
+}
 
-  /* position: absolute; */
+/* Movie Detail card */
+
+.content-detail {
+  position: absolute;
   display: flex;
   flex-direction: column;
   width: 450px;
   height: 400px;
-  background-color: #202020;
+  background-color: var(--clr-card);
   padding: 10px;
-  color: #c4c4c4;
-  top: 25%;
-  left: 34%;
-  position: fixed;
+  color: var(--clr-text-light);
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
+
+  /* Card position center viewport */
+  left: 50%;
+  top: 50%;
+  position: fixed;
+  margin-left: -237px;
+  margin-top: -170px;
 }
 .detail-content {
-  /* position: relative; */
   padding-left: 10px;
 }
 
@@ -171,20 +148,9 @@ img {
 .director {
   margin-bottom: 0.5rem;
 }
-.btn-close {
-  position: absolute;
-  top: 2%;
-  right: 2%;
-  padding: 3px 6px;
-  border: 1px solid white;
-  border-radius: 50%;
-  color: white;
-  cursor: pointer;
-  background-color: transparent;
-}
 
 .btn-close:hover {
-  background-color: #434242;
+  background-color: var(--clr-card-btn-hover);
 }
 
 .content-detail img {
@@ -211,26 +177,109 @@ img {
   font-weight: bold;
 }
 
+/* Forms -----------------------*/
 .form {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
   width: 400px;
   height: 500px;
-  background-color: #202020;
-  color: #c4c4c4;
 
+  background-color: var(--clr-card);
+  color: var(--clr-text-light);
   z-index: 222;
-  /* text-align: center; */
+  padding: 20px 10px 15px 20px;
+  border-radius: 10px;
 
-  top: 25%;
-  left: 36%;
+  /* Card position center viewport */
+  left: 50%;
+  top: 50%;
   position: fixed;
+  margin-left: -200px;
+  margin-top: -170px;
+
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
 }
 
+.btn-container-form {
+  display: flex;
+  gap: 1rem;
+  justify-content: start;
+}
+
+label {
+  width: 100px;
+  display: inline-block;
+  text-align: right;
+  margin-right: 10px;
+}
+
+.textarea-label {
+  height: 77px;
+  vertical-align: top;
+}
+
+textarea {
+  font-family: var(--ff-roboto);
+}
+
+/* Buttons -----------------------*/
+
+/* Detail/Update/Delet buttons */
+.content button,
+.form-btn {
+  border: 0.5px solid var(--clr-text-light);
+  padding: 4px 7px;
+  color: white;
+  background-color: var(--clr-card);
+  border-radius: 50px;
+}
+
+.content button:hover,
+.form-btn:hover {
+  cursor: pointer;
+  background-color: var(--clr-card-btn-hover);
+}
+
+/* Close (x-button) style */
+.btn-close {
+  position: absolute;
+  top: 2%;
+  right: 2%;
+  padding: 3px 6px;
+  border: 1px solid white;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+/* Add-Movie button */
+.add-btn {
+  position: fixed;
+  bottom: 2%;
+  right: 2%;
+  padding: 10px 15px;
+  border-radius: 50px;
+  border: none;
+  background: var(--clr-card);
+  cursor: pointer;
+  font-weight: bold;
+  color: white;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
+}
+
+.add-btn:hover {
+  background-color: var(--clr-card-btn-hover);
+  color: white;
+}
+
+.cancel-btn:hover {
+  /* color: red; */
+  border: 1px solid red;
+}
+
+/* Hidden display */
 .hidden {
   display: none;
 }
-
-/* form */

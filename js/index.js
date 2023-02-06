@@ -7,6 +7,8 @@
 
   refresh();
 
+  const localMoviesObj = {};
+
   function refresh() {
     getMovies().then((movies) => {
       console.log(movies);
@@ -72,7 +74,7 @@
     }
   });
 
-  // Hides movie cards and show movie description card
+  // Hides movie cards and show movie details
   function hideCards() {
     contentLoad.classList.add("opacity");
     contentDetail.classList.remove("hidden");
@@ -259,5 +261,18 @@
       .then(function () {
         refresh();
       });
+  });
+
+  const cancelBtn = document.querySelector(".cancel-btn");
+
+  // closes Update Form
+  cancelBtn.addEventListener("click", () => {
+    if (!updateMovieForm.classList.contains("hidden")) {
+      contentLoad.classList.remove("opacity");
+      updateMovieForm.classList.add("hidden");
+    } else if (!addMovieForm.classList.contains("hidden")) {
+      contentLoad.classList.remove("opacity");
+      addMovieForm.classList.add("hidden");
+    }
   });
 })();

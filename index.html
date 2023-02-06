@@ -5,17 +5,11 @@
     <title>Movies App</title>
 
     <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto+Flex:opsz,wght@8..144,400;8..144,700&display=swap"
-      rel="stylesheet"
-    />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Limelight&family=Roboto+Flex:opsz,wght@8..144,400;8..144,700&display=swap"
       rel="stylesheet"
     />
 
@@ -63,7 +57,7 @@
             <label class="label" for="image">Image:</label>
             <input type="text" id="image" />
           </div>
-          <div>
+          <div class="textarea-label">
             <label class="label" for="text-area">Description:</label>
             <textarea
               name="description"
@@ -73,7 +67,10 @@
             ></textarea>
           </div>
           <div>
-            <button type="submit" id="btn-submit">Submit</button>
+            <button type="submit" id="btn-submit" class="form-btn">
+              Submit
+            </button>
+            <button type="button" class="cancel-btn form-btn">Cancel</button>
           </div>
         </div>
 
@@ -111,8 +108,10 @@
             <label class="label" for="image">Image:</label>
             <input type="text" id="image-update" />
           </div>
-          <div>
-            <label class="label" for="text-area">Description:</label>
+          <div class="">
+            <label class="label textarea-label" for="text-area"
+              >Description:</label
+            >
             <textarea
               name="description"
               id="description-update"
@@ -120,8 +119,11 @@
               rows="5"
             ></textarea>
           </div>
-          <div>
-            <button type="submit" id="btn-submit-update">Submit</button>
+          <div class="btn-container-form">
+            <button class="form-btn" type="submit" id="btn-submit-update">
+              Submit
+            </button>
+            <button type="button" class="cancel-btn form-btn">Cancel</button>
           </div>
         </div>
 
