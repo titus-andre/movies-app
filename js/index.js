@@ -7,15 +7,12 @@
 
   refresh();
 
-  const localMoviesObj = {};
-
   function refresh() {
     getMovies().then((movies) => {
       console.log(movies);
       let html = "";
       for (let i = 0; i < movies.length; i++) {
-        // movieIds.push(movies[i].id);
-        html += ` 
+        html += `
               <div class="cards ">
                 <div class="movie-image">
                   <img src="${movies[i].image}" alt="shawshank" />
@@ -34,7 +31,7 @@
                   <div>
                     <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
                   </div>
-                  
+
                 </div>
               </div>
                   `;
@@ -65,6 +62,49 @@
   const imageAdd = document.querySelector("#image");
   const imageUpdate = document.querySelector("#image-update");
   const runtime = document.querySelector("#run-time");
+
+  // Search Bar
+  const searchInput = document.querySelector("#searchBar");
+  const searchBtn = document.querySelector("#search-btn");
+
+  function populate() {
+    getMovies().then((movies) => {
+      // console.log(movies)
+      const movieSearch = searchInput.value.toLowerCase();
+      console.log(movieSearch);
+      let html = "";
+      for (let i = 0; i < movies.length; i++) {
+        if (movies[i].title.toLowerCase().includes(movieSearch))
+          html += ` 
+            <div class="cards ">
+              <div class="movie-image">
+                <img src="${movies[i].image}" alt="shawshank" />
+              </div>
+              <div class="card-content">
+                <p class="rating"><span class="star">⭐️</span>  ${movies[i].rating}<span class="rating-max"> / 10</span></p>
+                <p class="title">${movies[i].title}</p>
+              </div>
+              <div class="btn-container">
+                <div class="btn-options">
+                  <button class="btn" id=""  type="button" data-id="${movies[i].id}">Details</button>
+                </div>
+                <div>
+                  <button class="update" type="button" data-id="${movies[i].id}">Update</button>
+                </div>
+                <div>
+                  <button class="delete" type="button" data-id="${movies[i].id}">Delete</button>
+                </div>
+                
+              </div>
+            </div>
+                `;
+      }
+      contentLoad.innerHTML = html;
+    });
+  }
+
+  //
+  searchBtn.addEventListener("click", populate);
 
   // eventListener on dyanmically created button
   main.addEventListener("click", (e) => {
@@ -190,8 +230,7 @@
 
       getMovies()
         .then((movies) => {
-          // let moviez = document.querySelector("#movie");
-          let html = "";
+          // let html = "";
 
           for (let i = 0; i < movies.length; i++) {
             if (movies[i].id === dataId) {
@@ -262,6 +301,8 @@
         refresh();
       });
   });
+
+  //Cancel Buttons
 
   const cancelBtn1 = document.querySelector(".cancel-btn1");
   const cancelBtn2 = document.querySelector(".cancel-btn2");

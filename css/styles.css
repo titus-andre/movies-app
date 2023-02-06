@@ -16,19 +16,15 @@
 
 body {
   font-family: var(--ff-roboto);
-  background-image: linear-gradient(
-      to right bottom,
-      rgba(128, 128, 128, 0.674),
-      rgba(255, 254, 254, 0.624)
-    ),
-    url("../img/bootleggers.jpg");
+
+  background-image: url("../img/bootleggers.jpg");
   background-size: cover;
   background-attachment: fixed;
 }
 
 .pagewrapper {
   height: 100vh;
-  width: 100%;
+  width: 90%;
 }
 
 .header {
@@ -39,7 +35,10 @@ body {
   font-family: var(--ff-title);
   letter-spacing: 1px;
   text-shadow: 5px 5px rgba(79, 79, 79, 0.862);
-  color: rgb(19, 17, 17);
+
+  /* color: rgb(19, 17, 17); */
+  color: #f5c519;
+  text-shadow: 5px 5px black;
 }
 
 .main {
@@ -225,6 +224,20 @@ textarea {
 
 /* Buttons -----------------------*/
 
+/* Searchbar submit/cancel buttons */
+#search-btn,
+#cancel-search {
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #f5c519;
+  cursor: pointer;
+  font-weight: bold;
+  color: black;
+  box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
+  margin: 0 0.5rem;
+}
+
 /* Detail/Update/Delet buttons */
 .content button,
 .form-btn {
@@ -262,10 +275,12 @@ textarea {
   padding: 10px 15px;
   border-radius: 50px;
   border: none;
-  background: var(--clr-card);
+
+  background-color: #f5c519;
+  /* background: var(--clr-card); */
   cursor: pointer;
   font-weight: bold;
-  color: white;
+  color: black;
   box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.442);
 }
 
@@ -278,6 +293,24 @@ textarea {
 .cancel-btn2:hover {
   /* color: red; */
   border: 1px solid red;
+}
+
+/* Searchbar */
+#searchbar-container {
+  text-align: center;
+}
+
+#searchBar {
+  height: 25px;
+  border-radius: 5px;
+  border: none;
+}
+
+.searchbar-label {
+  color: #f5c519;
+
+  font-size: 1.5rem;
+  text-shadow: 2.7px 2.7px black;
 }
 
 /* Hidden display */
